@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#0b6e4f"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>Nepe Data Services – Data Cleaning, Analysis, GIS & Reports</title>
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--tx:#1b2430;--mu:#5d6b7a;--ac:#0b6e4f;--bd:#e1e5ea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10161d;--card:#18212b;--tx:#e8edf2;--mu:#9aa8b6;--ac:#3ec28f;--bd:#2a3644}}
+:root[data-theme="dark"]{--bg:#10161d;--card:#18212b;--tx:#e8edf2;--mu:#9aa8b6;--ac:#3ec28f;--bd:#2a3644}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5}
+.w{max-width:960px;margin:0 auto;padding:20px}
+h1{font-size:1.8rem;margin:.2em 0}
+.sub{color:var(--mu);max-width:560px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:20px 0}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px}
+.card.pop{border:2px solid var(--ac)}
+.price{font-size:2rem;font-weight:700;color:var(--ac)}
+ul{padding-left:18px;color:var(--mu)}
+button,.btn{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:12px 16px;font-size:1rem;cursor:pointer;width:100%}
+label{display:block;margin:10px 0 4px;font-weight:600}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 200px}
+small{color:var(--mu)}
+footer{color:var(--mu);font-size:.85rem;padding:20px 0}
+</style>
+</head>
+<body>
+<div class="w">
+<h1>Nepe Data Services</h1>
+<p class="sub">Clean data, clear tables, charts and reports you can use. Fast turnaround, plain-English results. Excel, SPSS, STATA, SAS, GIS mapping, proposals, CVs and M&E.</p>
+
+<h2>Packages</h2>
+<div class="grid">
+<div class="card"><h3>Basic</h3><div class="price">$15</div>
+<ul><li>Clean one dataset</li><li>Simple summary tables</li><li>Up to 200 rows</li></ul>
+<button onclick="pick('Basic',15)">Order Basic</button></div>
+<div class="card pop"><h3>Standard</h3><div class="price">$40</div>
+<ul><li>Data analysis</li><li>Charts</li><li>One-page summary</li><li>Up to 1,000 rows</li></ul>
+<button onclick="pick('Standard',40)">Order Standard</button></div>
+<div class="card"><h3>Premium</h3><div class="price">$90</div>
+<ul><li>Full analysis</li><li>3–5 page report</li><li>One revision</li></ul>
+<button onclick="pick('Premium',90)">Order Premium</button></div>
+</div>
+<small>More than the row limit? Message me for a custom quote.</small>
+
+<h2>GIS &amp; Mapping Packages</h2>
+<div class="grid">
+<div class="card"><h3>GIS Basic</h3><div class="price">$25</div>
+<ul><li>One clean, labeled map (PDF and image)</li><li>Up to 100 points or one area boundary</li><li>Ready for reports or proposals</li></ul>
+<button onclick="pick('GIS Basic',25)">Order GIS Basic</button></div>
+<div class="card pop"><h3>GIS Standard</h3><div class="price">$60</div>
+<ul><li>Up to 3 maps (e.g. by district or theme)</li><li>GPS or survey data cleaned and mapped</li><li>Simple spatial analysis (counts by area, distances)</li><li>Up to 500 points</li></ul>
+<button onclick="pick('GIS Standard',60)">Order GIS Standard</button></div>
+<div class="card"><h3>GIS Premium</h3><div class="price">$130</div>
+<ul><li>Full spatial analysis (coverage, hotspots, population by area)</li><li>Up to 6 maps and the map data files</li><li>3-5 page report with maps</li><li>One revision</li></ul>
+<button onclick="pick('GIS Premium',130)">Order GIS Premium</button></div>
+</div>
+<small>Larger projects, many layers or field mapping? Message me for a custom quote.</small>
+
+<h2>More Services &amp; Guides</h2>
+<div class="grid" id="more"></div>
+<small>Guides are digital (PDF/Word) and sent by email after payment. Services are custom work: send your details first and I confirm the scope.</small>
+
+<h2 id="order">Place an order</h2>
+<div class="card">
+<div class="row">
+<div><label>Your name</label><input id="n"></div>
+<div><label>Email or phone</label><input id="c"></div>
+</div>
+<div class="row">
+<div><label>Package</label>
+<select id="p" onchange="upd()"><option value="Basic|15">Basic – $15</option><option value="Standard|40">Standard – $40</option><option value="Premium|90">Premium – $90</option><option value="GIS Basic|25">GIS Basic – $25</option><option value="GIS Standard|60">GIS Standard – $60</option><option value="GIS Premium|130">GIS Premium – $130</option></select></div>
+<div><label>Payment method</label>
+<select id="m"><option>Mobile Money</option><option>Other (we'll agree)</option></select></div>
+</div>
+<div class="row">
+<div><label>Mobile Money number you paid from</label><input id="s" inputmode="tel"></div>
+<div><label>Transaction ID (from your payment SMS)</label><input id="t"></div>
+</div>
+<small>Pay first to 0886567050 (Sleweon Nepe Jr.), then enter the number and transaction ID. Your package is delivered once I confirm the payment.</small>
+<label>Describe your data and what you need</label>
+<textarea id="d" rows="4" placeholder="e.g. Survey of 150 households; need cleaning, totals by district, one chart"></textarea>
+<p><small>Send your file after we confirm. Guides are emailed within minutes of payment confirmation; services start once payment is confirmed. Your data stays private.</small></p>
+<div class="row"><button onclick="send('wa')">Send order on WhatsApp</button><button onclick="send('em')">Send order by email</button></div>
+</div>
+
+<h2>How it works</h2>
+<ol style="color:var(--mu)"><li>Send your order by email with a sample of your data.</li><li>I confirm scope and price, and you pay.</li><li>I deliver your files, usually within 1–3 days.</li></ol>
+
+<h2>Payment details</h2>
+<div class="card" id="pay" style="color:var(--mu)">
+<b style="color:var(--tx)">Mobile Money:</b> 0886567050<br>
+Account name: Sleweon Nepe Jr. Send your payment screenshot with your order.
+</div>
+<footer>© <span id="y"></span> Nepe Data Services · Sleweon Nepe Jr. · nepejuniormama@gmail.com</footer>
+</div>
+<script>
+var WHATSAPP="231776294881";
+var EMAIL="nepejuniormama@gmail.com";
+document.getElementById('y').textContent=new Date().getFullYear();
+var MORE=[
+["Project Proposal Writing",80,"Service","Full proposal: problem, objectives, activities, budget narrative, M&E section. Donor format (up to 15 pages), one revision."],
+["Professional CV",15,"Service","Clean, modern CV tailored to your target job. Add a cover letter for $10 more."],
+["M&E Comprehensive Guide",25,"Guide","Step by step: results framework matrix, logframe, indicators, data plan and work plan, with fill-in templates and worked examples."],
+["M&E Framework &amp; Logframe Development",90,"Service","I build your M&E framework matrix, logframe and work plan for your project (one revision)."],
+["Plastic Recycling Hands-on Guide",20,"Guide","Practical guide to collecting, sorting, cleaning, shredding and turning plastic into bricks and products. Equipment, costs, safety."],
+["Plastic-to-Bricks Business Plan",100,"Service","Complete business plan with market, costs, profit projections and roadmap, ready to show a bank or donor."],
+["Job Application Pack",25,"Service","Tailored CV, cover letter and application review for one job."],
+["Survey Design &amp; Data Tools",70,"Service","Questionnaire design, sampling advice and mobile data collection form setup (KoboToolbox)."],
+["Excel Dashboard",50,"Service","Interactive Excel dashboard from your data with charts and key indicators."],
+["Training Session (2 hrs)",35,"Service","Live help with Excel, SPSS, STATA or QGIS, online or by phone/WhatsApp."]
+];
+var sel=document.getElementById('p'),box=document.getElementById('more');
+var og=document.createElement('optgroup');og.label='More services & guides';
+MORE.forEach(function(m){
+ var c=document.createElement('div');c.className='card';
+ c.innerHTML='<small>'+m[2]+'</small><h3>'+m[0]+'</h3><div class="price">$'+m[1]+'</div><p style="color:var(--mu)">'+m[3]+'</p>';
+ var b=document.createElement('button');b.textContent='Order';
+ b.onclick=function(){pick(m[0].replace(/&amp;/g,'&'),m[1])};c.appendChild(b);box.appendChild(c);
+ var o=document.createElement('option');o.value=m[0].replace(/&amp;/g,'&')+'|'+m[1];o.textContent=m[0].replace(/&amp;/g,'&')+' - $'+m[1];og.appendChild(o);
+});
+sel.appendChild(og);
+function pick(n,p){document.getElementById('p').value=n+'|'+p;document.getElementById('order').scrollIntoView({behavior:'smooth'})}
+function upd(){}
+function msg(){
+ var p=document.getElementById('p').value.split('|');
+ return 'New order%0A'+'Name: '+enc('n')+'%0A'+'Contact: '+enc('c')+'%0A'+'Package: '+p[0]+(p[1]>0?' ($'+p[1]+')':' (quote needed)')+'%0A'+'Payment: '+enc('m')+'%0A'+'Paid from: '+enc('s')+'%0A'+'Transaction ID: '+enc('t')+'%0A'+'Details: '+enc('d');
+}
+function enc(i){return encodeURIComponent(document.getElementById(i).value)}
+function send(t){
+ if(!document.getElementById('n').value||!document.getElementById('c').value){alert('Please add your name and contact.');return}
+if(t=='wa')location.href='https://wa.me/'+WHATSAPP+'?text='+msg();
+ else location.href='mailto:'+EMAIL+'?subject=New%20data%20order&body='+msg();
+}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
+</script>
+</body>
+</html>
